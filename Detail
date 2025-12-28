@@ -1,0 +1,45 @@
+# Foxerium SDK
+
+A TypeScript SDK for interacting with the Foxerium protocol on Solana.
+
+## Features
+
+- **Single-Asset Vaults**: Deposit and withdraw individual tokens into program-managed vaults.
+- **Oracle-Priced Swaps**: Swap supported tokens with prices determined by on-chain oracles.
+- **Adaptive Yield Routing**: Automatically route deposits for optimal yield across available vaults and strategies.
+
+## Important Notes
+
+- **No IDL Provided**:  
+  This SDK does **not** include an Interface Definition Language (IDL) file.  
+  You must provide a valid IDL or an initialized Anchor program instance for your deployment.
+
+- **Token Amounts in Base Units**:  
+  All token amounts must be specified in base units.  
+  _Example_: For USDC (6 decimals), 1 USDC = `1_000_000`.
+
+## Installation
+
+```shell
+npm install foxerium-sdk
+```
+
+## Usage
+
+```typescript
+import { FoxeriumClient } from 'foxerium-sdk';
+import { AnchorProvider } from '@coral-xyz/anchor';
+import idl from './your_deployment_idl.json';
+
+// Initialize Anchor provider (see @coral-xyz/anchor docs)
+const provider = AnchorProvider.local();
+
+// Initialize client
+const foxerium = new FoxeriumClient({
+  provider,
+  idl,
+  programId: 'YOUR_FOXERIUM_PROGRAM_ID', // Replace with your deployment's programId
+});
+
+// Example: Deposit 100 USDC (USDC has 6 decimals)
+const
